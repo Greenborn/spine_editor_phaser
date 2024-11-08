@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col">
-      <iframe class="visor-iframe" src="http://localhost:8080" frameborder="0"></iframe>
+      <iframe class="visor-iframe" src="http://localhost:5000" frameborder="0"></iframe>
     </div>
   </div>
 </template>

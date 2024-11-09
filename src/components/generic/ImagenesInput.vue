@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" v-if="props.config?.preview">
         <div class="col-12" v-for="(file, index) in archivos" :key="index">
             <div class="row">
                 <div class="col p-1">

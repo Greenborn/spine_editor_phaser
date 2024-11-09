@@ -20,11 +20,22 @@ app.use(bodyParser.json({ limit: '10mb' }));
 
 app.use("/", express.static('visor'))
 
-app.get('/get', (req, res) => {
-    console.log('/get')//, req.body);
 
-    return res.status(200).send({ "item": true });
-});
+let configuraciones = {
+    'animacion': 'walk'
+}
+
+app.get('/get_config', (req, res) => {
+    //console.log('/get_config')//, req.body);
+
+    return res.status(200).send({ "data": configuraciones });
+})
+
+app.put('/set_config', (req, res) => {
+    console.log('/set_config', req.body);
+    configuraciones[req.body.key] = req.body.value
+    return res.status(200).send({ "stat": true });
+})
 
 
 

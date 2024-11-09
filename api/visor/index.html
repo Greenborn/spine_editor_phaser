@@ -6,12 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
     <title>Spine Phaser Example</title>
 </head>
 
 <body class="p-4 flex flex-col items-center">
 </body>
 <script>
+    var personaje = null
+
     class Example extends Phaser.Scene {
         constructor() {
             super({
@@ -28,12 +31,12 @@
         }
 
         create() {
-            let man = this.add.spine(400, 600, 'set1.spineboy', 'aim', true);
+            personaje = this.add.spine(400, 600, 'set1.spineboy', 'aim', true);
 
             var controlBones = ["root", "hip controller", "hip", "rear-foot-ik", "rear-ankle-ik", "rear-thigh", "rear-shin", "rear-foot", "back-foot-tip", "board target", "crosshair", "aim-constraint-target", "clipping", "hoverboard controller", "move", "board", "exhaust1", "exhaust2", "exhaust3", "portal-root", "flare1", "flare2", "flare3", "flare4", "flare5", "flare6", "flare7", "flare8", "flare9", "flare10", "front-foot-ik", "front-ankle-ik", "torso", "torso2", "torso3", "front-upper-arm", "front-bracer", "front-fist", "front-thigh", "front-shin", "front-foot", "front-foot-tip", "rear-upper-arm", "rear-bracer", "gun", "gun-tip", "neck", "head", "hair1", "hair2", "hair3", "hair4", "hoverboard-thruster-front", "hoverboard-thruster-rear", "hoverglow-front", "hoverglow-rear", "muzzle", "portal", "portal-shade", "portal-streaks1", "portal-streaks2", "side-glow1", "side-glow2", "muzzle-ring", "muzzle-ring2", "muzzle-ring3", "muzzle-ring4" ];
 
             for (var i = 0; i < controlBones.length; i++) {
-                var bone = man.findBone(controlBones[i]);
+                var bone = personaje.findBone(controlBones[i]);
 
                 console.log(bone.data.name, bone.worldX, bone.worldY)
 
@@ -52,7 +55,7 @@
 
                     console.log(bone.data.name);
 
-                    var coords = this.spine.worldToLocal(dragX, dragY, man.skeleton, bone);
+                    var coords = this.spine.worldToLocal(dragX, dragY, personaje.skeleton, bone);
 
                     bone.x = coords.x;
                     bone.y = coords.y;
@@ -74,6 +77,27 @@
     };
 
     const game = new Phaser.Game(config);
+
+    let configs = {
+        animacion: ''
+    }
+
+    function updateConfigs( cnf ){
+        if (personaje == null) return
+
+        if (configs.animacion == '' || configs.animacion != cnf.animacion){
+            configs.animacion = cnf.animacion
+            personaje.setAnimation(0, cnf.animacion, true)
+            console.log('animacion', cnf.animacion )
+        }
+    }
+
+    setInterval(async function () {
+        let res_ = await axios.get('http://localhost:5000/get_config')
+        if (res_){
+            updateConfigs( res_.data.data )
+        }
+    }, 500)
 </script>
 
 </html>

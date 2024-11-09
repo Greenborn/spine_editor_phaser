@@ -18,6 +18,12 @@
         </div>
 
         <div class="col">
+            <div class="row">
+                <div class="col">
+                    <ImagenesInput v-model="model.imagen" :config="config_img" />
+                    cargar .atlas
+                </div>
+            </div>
             <AtlasTxtEditor @sprites_upd="sprites_updated"  />
         </div>
     </div>
@@ -28,7 +34,12 @@
 import { ref } from 'vue'
 
 import AtlasTxtEditor from './AtlasTxtEditor.vue';
+import ImagenesInput from './generic/ImagenesInput.vue';
 
+const model = ref({
+    imagen: ''
+})
+const config_img = ref({})
 const sprites = ref({})
 
 function sprites_updated(sprites_){

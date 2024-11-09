@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-auto">
+        <div class="col-auto p-0">
             <div class="zona_sprites">
                 <div class="sprite_data" v-for="sprite in sprites"  
                     :style="{
@@ -9,12 +9,12 @@
                         width: sprite.bounds.w + 'px',
                         height: sprite.bounds.h + 'px',
                         transform: 'rotate(' + sprite?.rotate + 'deg)',
-                        'transform-origin': 'right'
+                        'transform-origin': 'center'
                     }" >
                     <span class="extra_data">{{ sprite.name }}</span>
                 </div>
             </div>
-            <img src="http://localhost:5000/assets/atlas1.png" class="img-responsive" />
+            <img src="http://localhost:5000/assets/atlas1.png"  />
         </div>
 
         <div class="col">

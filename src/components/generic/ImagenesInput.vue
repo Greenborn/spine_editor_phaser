@@ -2,7 +2,7 @@
     <div class="row p-2">
         <div class="col">
             <input type="file" ref="file_input" id="myfile" name="myfile" accept=".png, .jpg, .jpeg .webp"
-                :multiple="(props.config?.max_files) ? props.config.max_files > 1 : false" @change="archivo_seleccionado">
+                :multiple="(props.config?.max_files) ? props.config.max_files > 1 : false || props.config?.multiple" @change="archivo_seleccionado">
             <p>
                 <small>
                     <span v-if="props.config?.max_files">Max. {{ props.config.max_files }} archivos,</span>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="row" v-if="props.config?.preview">
-        <div class="col-12" v-for="(file, index) in archivos" :key="index">
+        <div :class="props.config?.img_cont_class ? props.config?.img_cont_class: 'col-12'" v-for="(file, index) in archivos" :key="index">
             <div class="row">
                 <div class="col p-1">
                     <img class="w-100" :src="file.src" />

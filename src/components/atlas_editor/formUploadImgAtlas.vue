@@ -1,8 +1,10 @@
 <template>
     <div class="row">
         <div class="col">
-            <ImagenesInput v-model="model.imagen" :config="{}" />
-            cargar .atlas
+            <ImagenesInput v-model="model.imagen" 
+                :config="{ 
+                    preview: true, multiple: true, 
+                    img_cont_class: 'col-3 border' }" />
         </div>
     </div>
 </template>

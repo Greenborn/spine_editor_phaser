@@ -1,8 +1,8 @@
 <template>
     <div class="row">
         <div class="col p-0">
-
             <Splitter>
+
                 <SplitterPanel class="flex items-center justify-center">
                     <AtlasImgPrev :sprites="sprites" />
                 </SplitterPanel>
@@ -13,11 +13,8 @@
 
             </Splitter>
 
-
         </div>
-
     </div>
-
 </template>
 
 <script setup>

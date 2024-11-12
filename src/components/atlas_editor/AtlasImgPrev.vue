@@ -23,7 +23,7 @@ const props = defineProps(['sprites'])
 <style scoped>
 .cont-img {
     width: 100%;
-    height: 99vh;
+    height: calc(99vh - 6rem);
     overflow: scroll;
     background: #c2c2c2;
     position: relative;

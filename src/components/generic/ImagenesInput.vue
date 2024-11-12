@@ -17,8 +17,8 @@
             <div class="row">
                 <div class="col p-1">
                     <img class="w-100" :src="file.src" />
-                    <button type="button" class="btn-rel btn btn-danger"
-                        @click="archivos.splice(index, 1)">Quitar</button>
+                    <Button type="button" class="btn-rel" severity="danger" icon="pi pi-trash"
+                        @click="archivos.splice(index, 1)" />
                 </div>
             </div>
         </div>

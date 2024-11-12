@@ -4,11 +4,25 @@
             <Splitter>
 
                 <SplitterPanel class="flex items-center justify-center">
-                    <AtlasImgPrev :sprites="sprites" />
+                    <Tabs value="0">
+                        <TabList>
+                            <Tab value="0">Sprites</Tab>
+                            <Tab value="1">Imagen Atlas</Tab>
+                        </TabList>
+                        <TabPanels>
+                            <TabPanel value="0">
+                                <AtlasSprites :sprites="sprites"/>
+                            </TabPanel>
+                            <TabPanel value="1" class="p-0">
+                                <AtlasImgPrev :sprites="sprites" />
+                            </TabPanel>
+                        </TabPanels>
+                    </Tabs>
+                    
                 </SplitterPanel>
 
                 <SplitterPanel class="splitter-100vh flex items-center justify-center">
-                    <AtlasTools  @sprites_upd="sprites_updated" />
+                    <AtlasTools @sprites_upd="sprites_updated" />
                 </SplitterPanel>
 
             </Splitter>
@@ -21,6 +35,7 @@
 import { ref } from 'vue'
 import AtlasTools from './atlas_editor/AtlasTools.vue';
 import AtlasImgPrev from './atlas_editor/AtlasImgPrev.vue';
+import AtlasSprites from './atlas_editor/AtlasSprites.vue';
 
 const sprites = ref({})
 
@@ -29,6 +44,4 @@ function sprites_updated(sprites_) {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

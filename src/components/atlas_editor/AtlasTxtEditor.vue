@@ -1,7 +1,15 @@
 <template>
-    <div class="row">
-        <div class="col">
-            <textarea v-model="atlas_txt" class="form-control" @input="get_sprites_from_atlas()" rows="50"></textarea>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTextAtlas" aria-expanded="false" aria-controls="collapseTextAtlas">
+                Editor .atlas
+            </button>
+        </h2>
+        <div id="collapseTextAtlas" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <textarea v-model="atlas_txt" class="form-control" @input="get_sprites_from_atlas()" rows="50"></textarea>
+            </div>
         </div>
     </div>
 </template>

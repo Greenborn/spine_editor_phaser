@@ -9,8 +9,50 @@
             </div>
         </div>
         
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseConfGral" aria-expanded="false" aria-controls="collapseConfGral">
+                        Configuración General
+                    </button>
+                </h2>
+                <div id="collapseConfGral" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Configuración General Atlas
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseConfSprites" aria-expanded="false" aria-controls="collapseConfSprites">
+                        Configuración Sprites
+                    </button>
+                </h2>
+                <div id="collapseConfSprites" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Configuración Sprites
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTextAtlas" aria-expanded="false" aria-controls="collapseTextAtlas">
+                        Editor .atlas
+                    </button>
+                </h2>
+                <div id="collapseTextAtlas" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <AtlasTxtEditor @sprites_upd="sprites_updated" />
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        <AtlasTxtEditor @sprites_upd="sprites_updated" />
     </div>
 </template>
 

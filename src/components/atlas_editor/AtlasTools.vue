@@ -75,13 +75,36 @@ function subir_imagen() {
                 storeApp.ocultar_modal()
 
                 for (let i = 0; i < imgs.length; i++) {
+
+                    const split_ = imgs[i].base64.split(',');
+                    const bytes = atob(split_[1]);
+
+                    const arrayBuffer = new ArrayBuffer(bytes.length);
+                    const uint8Array = new Uint8Array(arrayBuffer);
+                    for (let i = 0; i < bytes.length; i++) {
+                        uint8Array[i] = bytes.charCodeAt(i);
+                    }
+
+                    const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
+                    const url = URL.createObjectURL(blob);
+
+                    const image = await new Promise(resolve => {
+                        const img = new Image();
+                        img.onload = () => {
+                            resolve(img);
+                        };
+                        img.src = url;
+                    })
+
+                    const { width, height } = image
+
                     model_atlas.value.sprites_conf.push({
-                        name: "sprite_"+model_atlas.value.sprites_conf.length, ancho: 0, alto: 0, x: 0, y: 0,
+                        name: "sprite_"+model_atlas.value.sprites_conf.length, ancho: width, alto: height, x: 0, y: 0,
                         img_data: imgs[i]
                     })
                 }
 
-                //console.log( model_atlas.value)
+                console.log( model_atlas.value)
                 atlas_txt_cmp.value.atlas_model_upd(model_atlas.value)
                 emit('sprites_upd', model_atlas.value)
             }

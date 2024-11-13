@@ -14,59 +14,7 @@
         </div>
 
         <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseConfGral" aria-expanded="false" aria-controls="collapseConfGral">
-                        Configuración General
-                    </button>
-                </h2>
-                <div id="collapseConfGral" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-
-                        <form>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="nombreImg" class="form-label">Nombre</label>
-                                    <input type="text" id="nombreImg" class="form-control"
-                                        placeholder="atlas.png" v-model="model_atlas.gral.img_name">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="anchoImg" class="form-label">Ancho</label>
-                                    <input type="number" id="anchoImg" class="form-control"
-                                        placeholder="1024" v-model="model_atlas.gral.ancho">
-                                </div>
-
-                                <div class="col-6">
-                                    <label for="altoImg" class="form-label">Alto</label>
-                                    <input type="number" id="altoImg" class="form-control"
-                                        placeholder="1024" v-model="model_atlas.gral.alto">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="filterImg" class="form-label">Filter</label>
-                                    <input type="text" id="filterImg" class="form-control"
-                                        placeholder="filter:Linear,Linear"  v-model="model_atlas.gral.filter">
-                                </div>
-
-                                <div class="col-6">
-                                    <label for="pmaImg" class="form-label">Pma</label>
-                                    <input type="text" id="pmaImg" class="form-control"
-                                        placeholder="pma:true"  v-model="model_atlas.gral.pma">
-                                </div>
-                            </div>
-
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-
+            <AtlasCfgGral :gral = "model_atlas.gral" />
             <AtlasCfgSprites :sprites = "model_atlas.sprites_conf" @sprites_upd="sprites_updated" />
             <AtlasTxtEditor @sprites_upd="sprites_updated" />
         </div>
@@ -83,6 +31,7 @@ import AtlasTxtEditor from './AtlasTxtEditor.vue';
 import FormUploadImgAtlas from './formUploadImgAtlas.vue';
 import AtlasHelp from './AtlasHelp.vue';
 import AtlasCfgSprites from './AtlasCfgSprites.vue';
+import AtlasCfgGral from './AtlasCfgGral.vue';
 
 const storeApp = AppStore()
 
@@ -111,7 +60,10 @@ function sprites_updated(sprites_) {
 function subir_imagen() {
     storeApp.mostrar_modal(FormUploadImgAtlas, 'Cargar Imagen Atlas',
         {
-
+            agregar_img: async ( imgs ) => {
+                console.log(imgs)
+                storeApp.ocultar_modal()
+            }
         })
 }
 

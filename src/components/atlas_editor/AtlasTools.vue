@@ -14,9 +14,9 @@
         </div>
 
         <div class="accordion" id="accordionExample">
-            <AtlasCfgGral :gral = "model_atlas.gral" />
-            <AtlasCfgSprites :sprites = "model_atlas.sprites_conf" @sprites_upd="sprites_updated" />
-            <AtlasTxtEditor @sprites_upd="sprites_updated" />
+            <AtlasCfgGral    :gral = "model_atlas.gral" @conf_gral_upd="conf_gral_upd"/>
+            <AtlasCfgSprites :sprites = "model_atlas.sprites_conf"  />
+            <AtlasTxtEditor  />
         </div>
 
     </div>
@@ -44,6 +44,10 @@ const model_atlas = ref({
     sprites_conf: []
 })
 
+function conf_gral_upd(gral_) {
+    model_atlas.value.gral = gral_
+}
+
 function sprites_updated(sprites_) {
     model_atlas.value.sprites_conf = []
 
@@ -51,7 +55,7 @@ function sprites_updated(sprites_) {
     for (let i = 0; i < keys_.length; i++) {
         const sprite_ = sprites_[keys_[i]] 
         model_atlas.value.sprites_conf.push({
-            nombre: sprite_.name, ancho: sprite_.bounds.w, alto: sprite_.bounds.h, x: sprite_.bounds.x, y: sprite_.bounds.y
+            name: sprite_.name, ancho: sprite_.bounds.w, alto: sprite_.bounds.h, x: sprite_.bounds.x, y: sprite_.bounds.y
         })
     }
     emit('sprites_upd', sprites_)
@@ -61,8 +65,17 @@ function subir_imagen() {
     storeApp.mostrar_modal(FormUploadImgAtlas, 'Cargar Imagen Atlas',
         {
             agregar_img: async ( imgs ) => {
-                console.log(imgs)
                 storeApp.ocultar_modal()
+
+                for (let i = 0; i < imgs.length; i++) {
+                    model_atlas.value.sprites_conf.push({
+                        name: "sprite_"+model_atlas.value.sprites_conf.length, ancho: 0, alto: 0, x: 0, y: 0,
+                        img_data: imgs[i]
+                    })
+                }
+
+                console.log( model_atlas.value)
+                emit('sprites_upd', model_atlas.value)
             }
         })
 }

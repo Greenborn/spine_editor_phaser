@@ -11,42 +11,38 @@
 
                 <Accordion value="0">
                     <AccordionPanel v-for="(sprite, index) in sprites" :key="index" :value="index">
-                        <AccordionHeader>{{ sprite.nombre }}</AccordionHeader>
+                        <AccordionHeader>{{ sprite.name }}</AccordionHeader>
                         <AccordionContent>
                             <form>
                                 <div class="row">
-                                    <div class="col">
-                                        <label for="nombreSprite" class="form-label">Nombre</label>
-                                        <input type="text" id="nombreSprite" class="form-control"
-                                            placeholder="nombre sprite" v-model="sprite.nombre">
+                                    <div class="col-12">
+                                        <small><label for="nameSprite" class="form-label">name</label></small>
+                                        <input type="text" id="nameSprite" class="form-control"
+                                            placeholder="name sprite" v-model="sprite.name">
                                     </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label for="anchoSprite" class="form-label">Ancho</label>
+                                
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <small><label for="anchoSprite" class="form-label">Ancho</label></small>
                                         <input type="number" id="anchoSprite" class="form-control" placeholder="1024"
-                                            v-model="sprite.ancho">
+                                            v-model="sprite.ancho" disabled>
                                     </div>
 
-                                    <div class="col-6">
-                                        <label for="altoSprite" class="form-label">Alto</label>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <small><label for="altoSprite" class="form-label">Alto</label></small>
                                         <input type="number" id="altoSprite" class="form-control" placeholder="1024"
-                                            v-model="sprite.alto">
+                                            v-model="sprite.alto" disabled>
                                     </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label for="xSprite" class="form-label">x</label>
+                                
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <small><label for="xSprite" class="form-label">x</label></small>
                                         <input type="number" id="xSprite" class="form-control" placeholder="0"
-                                            v-model="sprite.x">
+                                            v-model="sprite.x" disabled>
                                     </div>
 
-                                    <div class="col-6">
-                                        <label for="ySprite" class="form-label">y</label>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <small><label for="ySprite" class="form-label">y</label></small>
                                         <input type="number" id="ySprite" class="form-control" placeholder="0"
-                                            v-model="sprite.y">
+                                            v-model="sprite.y" disabled>
                                     </div>
                                 </div>
 

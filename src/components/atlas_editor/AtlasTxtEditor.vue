@@ -24,7 +24,7 @@ const lineas_atlas = ref([])
 const sprites = ref({})
 
 function get_sprites_from_atlas(){
-    //la primera linea se ignora por ser nombre de imagen
+    //la primera linea se ignora por ser name de imagen
     //la segunda por corresponder al tamaño
     //la tercera por ser conf filtros
     //la cuarta pma:true no se que es

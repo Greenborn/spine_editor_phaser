@@ -62,7 +62,6 @@ async function archivo_seleccionado(evnt) {
                 src: URL.createObjectURL(files[i]),
                 base64: await redimensionarImagen(String(reader.result), props.config?.max_width, props.config?.max_height)
             })
-            console.log(archivos.value)
             emit('update:modelValue', archivos.value)
         }
     }

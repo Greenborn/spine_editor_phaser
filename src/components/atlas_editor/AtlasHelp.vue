@@ -15,7 +15,7 @@
         <div class="col pt-2">
             <p>
                 Al apretar este botón se presentará un formulario en el cual será posible seleccionar todas las imágenes a incluir
-                pudiendo visualizar las mismas en una grilla y asignar el nombre correspondiente con el cual luego podrán ser referenciadas.
+                pudiendo visualizar las mismas en una grilla y asignar el name correspondiente con el cual luego podrán ser referenciadas.
             </p>
         </div>
     </div>

@@ -12,9 +12,9 @@
                 <form>
                     <div class="row">
                         <div class="col">
-                            <label for="nombreImg" class="form-label">Nombre</label>
-                            <input type="text" id="nombreImg" class="form-control" placeholder="atlas.png"
-                                v-model="gral.img_name">
+                            <label for="nameImg" class="form-label">name</label>
+                            <input type="text" id="nameImg" class="form-control" placeholder="atlas.png"
+                                v-model="gral.img_name" @change="conf_change"/>
                         </div>
                     </div>
 
@@ -22,13 +22,13 @@
                         <div class="col-6">
                             <label for="anchoImg" class="form-label">Ancho</label>
                             <input type="number" id="anchoImg" class="form-control" placeholder="1024"
-                                v-model="gral.ancho">
+                                v-model="gral.ancho" disabled/>
                         </div>
 
                         <div class="col-6">
                             <label for="altoImg" class="form-label">Alto</label>
                             <input type="number" id="altoImg" class="form-control" placeholder="1024"
-                                v-model="gral.alto">
+                                v-model="gral.alto" disabled/>
                         </div>
                     </div>
 
@@ -36,13 +36,13 @@
                         <div class="col-6">
                             <label for="filterImg" class="form-label">Filter</label>
                             <input type="text" id="filterImg" class="form-control" placeholder="filter:Linear,Linear"
-                                v-model="gral.filter">
+                                v-model="gral.filter" @change="conf_change"/>
                         </div>
 
                         <div class="col-6">
                             <label for="pmaImg" class="form-label">Pma</label>
                             <input type="text" id="pmaImg" class="form-control" placeholder="pma:true"
-                                v-model="gral.pma">
+                                v-model="gral.pma" @change="conf_change"/>
                         </div>
                     </div>
 
@@ -57,5 +57,9 @@
 import { ref } from 'vue'
 
 const props = defineProps(['gral'])
+const emit = defineEmits(['conf_gral_upd'])
 
+function conf_change(){
+    emit('conf_gral_upd', props.gral)
+}
 </script>

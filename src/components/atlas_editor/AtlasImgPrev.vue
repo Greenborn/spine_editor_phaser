@@ -1,11 +1,11 @@
 <template>
     <div class="cont-img">
         <div class="zona_sprites">
-            <div class="sprite_data" v-for="sprite in props.sprites" :style="{
-                top: sprite.bounds.y + 'px',
-                left: sprite.bounds.x + 'px',
-                width: sprite.bounds.w + 'px',
-                height: sprite.bounds.h + 'px',
+            <div class="sprite_data" v-for="sprite in props.sprites?.sprites_conf" :style="{
+                top: sprite?.bounds?.y + 'px',
+                left: sprite?.bounds?.x + 'px',
+                width: sprite?.bounds?.w + 'px',
+                height: sprite?.bounds?.h + 'px',
                 transform: 'rotate(' + sprite?.rotate + 'deg)',
                 'transform-origin': 'center'
             }">

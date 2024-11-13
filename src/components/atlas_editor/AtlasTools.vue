@@ -6,8 +6,8 @@
                     raised />
                 <Button label="Subir Sprites" @click="subir_imagen" severity="contrast" icon="pi pi-images" class="m-1"
                     raised />
-                <Button label="Subir Atlas" @click="subir_imagen" severity="contrast" icon="pi pi-image" class="m-1"
-                    raised />
+                <!--<Button label="Subir Atlas" @click="subir_imagen" severity="contrast" icon="pi pi-image" class="m-1"
+                    raised />-->
                 <Button label="Descargar Atlas" @click="subir_imagen" severity="success" icon="pi pi-download"
                     class="m-1" raised />
             </div>
@@ -118,6 +118,7 @@ function generar_img_atlas() {
     canvas.height = alto_max.value * raiz
     const ctx = canvas.getContext('2d')
     
+    //Se genera matriz posicionando elementos
     let matriz = []
     for (let i = 0; i < raiz; i++) {
         if (!matriz[i]) matriz[i] = []
@@ -126,19 +127,34 @@ function generar_img_atlas() {
             const POS_ARR = sprites_.length
             if (!SPRITE_) break
 
-            matriz[i].push(SPRITE_)
+            
             const px = i*ancho_max.value
             const py = j*alto_max.value
-console.log(POS_ARR)
+
             model_atlas.value.sprites_conf[POS_ARR].x = px
             model_atlas.value.sprites_conf[POS_ARR].y = py
 
-            const IMG_ = new Image()
-            IMG_.src = SPRITE_.img_data.base64
+            matriz[i].push({
+                base64: SPRITE_.img_data.base64,
+                x: px, y: py,
+                ancho: SPRITE_.ancho,
+                alto: SPRITE_.alto
+            })            
+        }
+    }
 
-            //console.log(px, py, SPRITE_.ancho, SPRITE_.alto)
+    //Se dibuja matriz en canvas
+
+    for (let i = 0; i < matriz.length; i++) {
+        for (let j = 0; j < matriz[i].length; j++) {
+            const SPRITE_ = matriz[i][j]
+            if (!SPRITE_) break
+            
+            const IMG_ = new Image()
+            IMG_.src = SPRITE_.base64
+
             IMG_.onload = () => {
-                ctx.drawImage(IMG_, px, py, SPRITE_.ancho, SPRITE_.alto)
+                ctx.drawImage(IMG_, SPRITE_.x, SPRITE_.y, SPRITE_.ancho, SPRITE_.alto)
             }
             
         }

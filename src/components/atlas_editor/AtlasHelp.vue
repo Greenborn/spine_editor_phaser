@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="row border-top">
+    <!--<div class="row border-top">
         <div class="col-2 text-center pt-2">
             <Button label="Subir Atlas" severity="contrast" icon="pi pi-image"  class="m-1" raised />
         </div>
@@ -31,7 +31,7 @@
                 el propio archivo .atlas.
             </p>
         </div>
-    </div>
+    </div>-->
 
     <div class="row border-top">
         <div class="col-2 text-center pt-2">

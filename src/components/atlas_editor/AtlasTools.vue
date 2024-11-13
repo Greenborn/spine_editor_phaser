@@ -35,6 +35,7 @@ import AtlasCfgGral from './AtlasCfgGral.vue';
 
 const storeApp = AppStore()
 
+defineExpose({ atlas_model_upd })
 const emit = defineEmits(['sprites_upd'])
 
 const atlas_txt_cmp = ref()
@@ -47,6 +48,11 @@ const model_atlas = ref({
 
 function conf_gral_upd(gral_) {
     model_atlas.value.gral = gral_
+}
+
+function atlas_model_upd(_model){
+    model_atlas.value = _model
+    atlas_txt_cmp.value.atlas_model_upd(_model)
 }
 
 function sprites_updated(sprites_) {

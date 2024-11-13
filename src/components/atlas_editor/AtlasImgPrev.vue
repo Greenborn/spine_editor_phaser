@@ -2,22 +2,23 @@
     <div class="cont-img">
         <div class="zona_sprites">
             <div class="sprite_data" v-for="sprite in props.sprites?.sprites_conf" :style="{
-                top: sprite?.bounds?.y + 'px',
-                left: sprite?.bounds?.x + 'px',
-                width: sprite?.bounds?.w + 'px',
-                height: sprite?.bounds?.h + 'px',
+                top: sprite?.y + 'px',
+                left: sprite?.x + 'px',
+                width: sprite?.ancho + 'px',
+                height: sprite?.alto + 'px',
                 transform: 'rotate(' + sprite?.rotate + 'deg)',
                 'transform-origin': 'center'
             }">
                 <span class="extra_data">{{ sprite.name }}</span>
             </div>
         </div>
-        <img class="border" src="http://localhost:5000/assets/atlas1.png" />
+        <img v-if="sprites.atlas_img_src != ''" class="border" :src="sprites.atlas_img_src" />
     </div>
 </template>
 
 <script setup>
 const props = defineProps(['sprites'])
+
 </script>
 
 <style scoped>

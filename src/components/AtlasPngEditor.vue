@@ -14,7 +14,7 @@
                                 <AtlasSprites :sprites="sprites" @sprites_upd="sprites_updated"/>
                             </TabPanel>
                             <TabPanel value="1" class="p-0">
-                                <AtlasImgPrev :sprites="sprites" />
+                                <AtlasImgPrev :sprites="sprites"  />
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
@@ -39,10 +39,10 @@ import AtlasSprites from './atlas_editor/AtlasSprites.vue';
 
 const sprites = ref({})
 const atlas_tools_cmp = ref()
+
 function sprites_updated(sprites_) {
     sprites.value = sprites_
-    if (atlas_tools_cmp.value)
-        atlas_tools_cmp.value.atlas_model_upd(sprites_)
+    atlas_tools_cmp.value.atlas_model_upd(sprites_)
 }
 </script>
 

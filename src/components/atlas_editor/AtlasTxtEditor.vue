@@ -8,60 +8,35 @@
         </h2>
         <div id="collapseTextAtlas" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <textarea v-model="atlas_txt" class="form-control" @input="get_sprites_from_atlas()" rows="50"></textarea>
+                <textarea v-model="atlas_txt" class="form-control" rows="50" disabled></textarea>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
-const emit  = defineEmits(['sprites_upd'])
+defineExpose({ atlas_model_upd })
+
+const atlas_model = ref({})
 
 const atlas_txt = ref('')
-const lineas_atlas = ref([])
-const sprites = ref({})
 
-function get_sprites_from_atlas(){
-    //la primera linea se ignora por ser name de imagen
-    //la segunda por corresponder al tamaño
-    //la tercera por ser conf filtros
-    //la cuarta pma:true no se que es
-    let element = {}
-    lineas_atlas.value = atlas_txt.value.split('\n')
-    for (let index = 4; index < lineas_atlas.value.length; index++) {
-        const line = lineas_atlas.value[index]
-        if (line == '') continue
+function atlas_model_upd(_model){
+    atlas_txt.value = ''
+    atlas_model.value = _model
+    atlas_txt.value += atlas_model.value?.gral?.img_name + '\n'
+    atlas_txt.value += "size:,\n"
+    atlas_txt.value += atlas_model.value?.gral?.filter + "\n"
+    atlas_txt.value += atlas_model.value?.gral?.pma + "\n"
 
-        if (line.includes('/')){
-            element = {
-                name: line.replace('\r',''),
-                bounds: []
-            }
-        } else 
-        if (line.includes('rotate')){
-            element['rotate'] = line.replace('\r','').split(':')[1]
-        } else 
-        if (line.includes('bounds')){
-            let coords = line.replace('\r','').split(':')[1].split(',')
-            element.bounds = { 
-                x: Number(coords[0]), y: Number(coords[1]),
-                w: Number(coords[2]), h: Number(coords[3]) 
-            }
-            
-            sprites.value[element.name] = element
-        }
-        emit('sprites_upd', sprites.value)
+    for (let i=0; i < atlas_model.value?.sprites_conf.length; i++){
+        const sprite = atlas_model.value?.sprites_conf[i]
+        atlas_txt.value += sprite?.name + '\n'
+        atlas_txt.value += "bounds:" + sprite?.x + ',' + sprite?.y + ',' + sprite?.ancho + ',' + sprite?.alto + '\n'
     }
+    //console.log(atlas_model.value)   
 }
-
-onMounted(async ()=>{
-    //let res_ = await axios.get('http://localhost:5000/assets/atlas1.atlas')
-    //if (res_){
-    //    atlas_txt.value = res_.data
-    //    get_sprites_from_atlas()
-    //}
-})
 
 </script>

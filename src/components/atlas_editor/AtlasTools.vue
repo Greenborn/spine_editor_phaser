@@ -16,7 +16,7 @@
         <div class="accordion" id="accordionExample">
             <AtlasCfgGral    :gral = "model_atlas.gral" @conf_gral_upd="conf_gral_upd"/>
             <AtlasCfgSprites :sprites = "model_atlas.sprites_conf"  />
-            <AtlasTxtEditor  />
+            <AtlasTxtEditor  ref="atlas_txt_cmp" />
         </div>
 
     </div>
@@ -37,6 +37,7 @@ const storeApp = AppStore()
 
 const emit = defineEmits(['sprites_upd'])
 
+const atlas_txt_cmp = ref()
 const model_atlas = ref({
     gral: {
         img_name: 'atlas.png', ancho: 0, alto: 0, filter: 'filter:Linear,Linear', pma: 'pma:true'
@@ -74,7 +75,8 @@ function subir_imagen() {
                     })
                 }
 
-                console.log( model_atlas.value)
+                //console.log( model_atlas.value)
+                atlas_txt_cmp.value.atlas_model_upd(model_atlas.value)
                 emit('sprites_upd', model_atlas.value)
             }
         })

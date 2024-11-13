@@ -16,7 +16,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
 
 const emit  = defineEmits(['sprites_upd'])
 
@@ -58,11 +57,11 @@ function get_sprites_from_atlas(){
 }
 
 onMounted(async ()=>{
-    let res_ = await axios.get('http://localhost:5000/assets/atlas1.atlas')
-    if (res_){
-        atlas_txt.value = res_.data
-        get_sprites_from_atlas()
-    }
+    //let res_ = await axios.get('http://localhost:5000/assets/atlas1.atlas')
+    //if (res_){
+    //    atlas_txt.value = res_.data
+    //    get_sprites_from_atlas()
+    //}
 })
 
 </script>

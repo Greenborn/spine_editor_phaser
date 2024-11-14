@@ -138,13 +138,33 @@ function generar_img_atlas() {
                 base64: SPRITE_.img_data.base64,
                 x: px, y: py,
                 ancho: SPRITE_.ancho,
-                alto: SPRITE_.alto
+                alto: SPRITE_.alto,
+                pos_arr: POS_ARR
             })            
         }
     }
 
-    //Se dibuja matriz en canvas
+    //Se ajustan espacios vacios entre elementos
+    for (let i = 0; i < matriz.length; i++) {
+        for (let j = 0; j < matriz[i].length; j++) {
+            const SPRITE_ = matriz[i][j]
+            if (!SPRITE_) break
 
+            const DIFF_W = ((i+1)*ancho_max.value) - matriz[i][j].x - SPRITE_.ancho
+            const DIFF_H = ((j+1)*alto_max.value) - matriz[i][j].y - SPRITE_.alto
+
+            if (DIFF_W > 0 && matriz[i+1][j])
+                matriz[i+1][j].x -= DIFF_W
+
+            if (DIFF_H > 0 && matriz[i][j+1]) 
+                matriz[i][j+1].y -= DIFF_H
+            
+            model_atlas.value.sprites_conf[SPRITE_.pos_arr].x = matriz[i][j].x
+            model_atlas.value.sprites_conf[SPRITE_.pos_arr].y = matriz[i][j].y
+        }
+    } 
+
+    //Se dibuja matriz en canvas
     for (let i = 0; i < matriz.length; i++) {
         for (let j = 0; j < matriz[i].length; j++) {
             const SPRITE_ = matriz[i][j]

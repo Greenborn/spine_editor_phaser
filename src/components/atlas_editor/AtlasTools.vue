@@ -126,7 +126,6 @@ function generar_img_atlas() {
             const SPRITE_ = sprites_.pop()
             const POS_ARR = sprites_.length
             if (!SPRITE_) break
-
             
             const px = i*ancho_max.value
             const py = j*alto_max.value
@@ -137,33 +136,36 @@ function generar_img_atlas() {
             matriz[i].push({
                 base64: SPRITE_.img_data.base64,
                 x: px, y: py,
-                ancho: SPRITE_.ancho,
-                alto: SPRITE_.alto,
+                ancho: SPRITE_.ancho, alto: SPRITE_.alto,
+                vacio_x: (ancho_max.value - SPRITE_.ancho), 
+                vacio_y: (alto_max.value - SPRITE_.alto),
                 pos_arr: POS_ARR
             })            
         }
     }
 
-    //Se ajustan espacios vacios entre elementos
-    for (let i = 0; i < matriz.length; i++) {
-        for (let j = 0; j < matriz[i].length; j++) {
-            const SPRITE_ = matriz[i][j]
+    //Se ajustan espacios vacios entre elementos eje Y
+    for (let x = 0; x < matriz.length; x++) {
+        let columna = matriz[x]
+
+        for (let y = 0; y < columna.length; y++) {
+            const SPRITE_ = columna[y]
             if (!SPRITE_) break
 
-            const DIFF_W = ((i+1)*ancho_max.value) - matriz[i][j].x - SPRITE_.ancho
-            const DIFF_H = ((j+1)*alto_max.value) - matriz[i][j].y - SPRITE_.alto
-
-            if (DIFF_W > 0 && matriz[i+1][j])
-                matriz[i+1][j].x -= DIFF_W
-
-            if (DIFF_H > 0 && matriz[i][j+1]) 
-                matriz[i][j+1].y -= DIFF_H
-            
-            model_atlas.value.sprites_conf[SPRITE_.pos_arr].x = matriz[i][j].x
-            model_atlas.value.sprites_conf[SPRITE_.pos_arr].y = matriz[i][j].y
+            let n = 1
+            while (columna[y+n]){
+                if (SPRITE_.vacio_y > 0) {
+                    columna[y+n].y -= SPRITE_.vacio_y
+                    model_atlas.value.sprites_conf[columna[y+n].pos_arr].y = columna[y+n].y
+                    
+                }
+                n++
+            }
+            model_atlas.value.sprites_conf[SPRITE_.pos_arr].vacio_y = 0
         }
-    } 
-
+    }
+    
+    
     //Se dibuja matriz en canvas
     for (let i = 0; i < matriz.length; i++) {
         for (let j = 0; j < matriz[i].length; j++) {

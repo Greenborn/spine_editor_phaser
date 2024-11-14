@@ -27,7 +27,7 @@ function atlas_model_upd(_model){
     atlas_txt.value = ''
     atlas_model.value = _model
     atlas_txt.value += atlas_model.value?.gral?.img_name + '\n'
-    atlas_txt.value += "size:,\n"
+    atlas_txt.value += "size:" + atlas_model.value?.gral?.ancho + "," + atlas_model.value?.gral?.alto + ",\n"
     atlas_txt.value += atlas_model.value?.gral?.filter + "\n"
     atlas_txt.value += atlas_model.value?.gral?.pma + "\n"
 
@@ -36,6 +36,8 @@ function atlas_model_upd(_model){
         atlas_txt.value += sprite?.name + '\n'
         atlas_txt.value += "bounds:" + sprite?.x + ',' + sprite?.y + ',' + sprite?.ancho + ',' + sprite?.alto + '\n'
     }
+
+    return atlas_txt.value
     //console.log(atlas_model.value)   
 }
 

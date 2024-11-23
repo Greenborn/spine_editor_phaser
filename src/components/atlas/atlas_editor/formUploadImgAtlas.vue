@@ -20,7 +20,7 @@
 <script setup>
 import { ref } from 'vue'
 
-import ImagenesInput from '../generic/ImagenesInput.vue';
+import ImagenesInput from '../../generic/ImagenesInput.vue';
 
 const props = defineProps(['parametros'])
 

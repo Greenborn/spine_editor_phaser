@@ -25,7 +25,7 @@
 <script setup>
 import { ref } from 'vue'
 
-import { AppStore } from "../../stores/app"
+import { AppStore } from "../../../stores/app"
 import AtlasTxtEditor from './AtlasTxtEditor.vue';
 
 import FormUploadImgAtlas from './formUploadImgAtlas.vue';
